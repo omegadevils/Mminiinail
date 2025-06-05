@@ -33,7 +33,7 @@ def handle_message(event):
 
     if mtext == "@預約時間": #如果消息為特定命令
         try:
-            message = TextSendMessage(text="🐬六月份可預約時間🐬\n6/10 13:00 18:00\n6/11 13:00 18:00\n6/13 13:00 18:00\n6/15 18:00\n6/17 13:00 18:00\n6/18 18:\n6/19 18:00\n6/21 13:00 18:00\n6/23 18:00\n6/25 13:00 18:00\n6/27 13:00 18:00\n6/28 13:00 18:00")
+            message = TextSendMessage(text="🐬六月份可預約時間🐬\n6/10 13:00 18:00\n6/11 13:00 18:00\n6/13 13:00 18:00\n6/15 18:00\n6/17 13:00 18:00\n6/18 18:00\n6/19 18:00\n6/21 13:00 18:00\n6/23 18:00\n6/25 13:00 18:00\n6/27 13:00 18:00\n6/28 13:00 18:00")
             line_bot_api.reply_message(event.reply_token, message)
         except:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="發生錯誤！"))
