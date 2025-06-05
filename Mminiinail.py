@@ -1,16 +1,16 @@
-from flask import Flask
+from flask import Flask, request, abort
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+    ImageSendMessage,LocationSendMessage
+)
+
 app = Flask(__name__)
 
-from flask import request, abort
-from linebot import  LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, PostbackEvent, TextSendMessage, ImagemapSendMessage, BaseSize, MessageImagemapAction, URIImagemapAction, ImagemapArea, TemplateSendMessage, ButtonsTemplate, DatetimePickerTemplateAction
-from urllib.parse import parse_qsl
-import datetime
-import os
-line_bot_api = LineBotApi(os.getenv("Token"))
-handler = WebhookHandler(os.getenv("Secert"))
-
+# 請替換為你自己的 Channel Access Token 與 Secret
+line_bot_api = LineBotApi('7qvpf1uhPeS4oTJDBXxqKgkLymA55nEEVN9HKEvTTWBcectBrvg86jQKQW/erd5w2HsNEuHj0whtLeeNJ+iQIRz5nZvXe3xxmuOGZdDyxYmujhAcszttlIzS4xf4+G5ECnpSHoXr0gh75/uhVBNsigdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('c786334e55577e98de455385928df3fe')
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -28,9 +28,9 @@ def callback():
 def handle_message(event):
     mtext = event.message.text
 
-    if mtext == "@傳送文字": #如果消息為特定命令
+    if mtext == "@預約時間": #如果消息為特定命令
         try:
-            message = TextSendMessage(text="tokinosora desu")
+            message = TextSendMessage(text="🐬六月份可預約時間🐬\n6/10 13:00 18:00\n6/11 13:00 18:00\n6/13 13:00 18:00\n6/15 18:00\n6/17 13:00 18:00\n6/18 18:\n6/19 18:00\n6/21 13:00 18:00\n6/23 18:00\n6/25 13:00 18:00\n6/27 13:00 18:00\n6/28 13:00 18:00")
             line_bot_api.reply_message(event.reply_token, message)
         except:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="發生錯誤！"))
@@ -47,7 +47,7 @@ def handle_message(event):
 
     elif mtext == "@預約": #如果消息為預約命令
         try:
-            message = TextSendMessage(text="預約\n🐬六月份可預約時間🐬\n6/10 13:00 18:00\n6/11 13:00 18:00\n6/13 13:00 18:00\n6/15 18:00\n6/17 13:00 18:00\n6/18 18:\n6/19 18:00\n6/21 13:00 18:00\n6/23 18:00\n6/25 13:00 18:00\n6/27 13:00 18:00\n6/28 13:00 18:00\n🐬預約請填寫以下表格🐬\n真實姓名：\n聯絡電話：\n預約日期及時間：\n欲施作項目：\n是否需卸甲：\n⤷可先提供欲施作的造型圖.ᐟ")
+            message = TextSendMessage(text="🐬預約請填寫以下表格🐬\n真實姓名：\n聯絡電話：\n預約日期及時間：\n欲施作項目：\n是否需卸甲：\n⤷可先提供欲施作的造型圖.ᐟ")
             line_bot_api.reply_message(event.reply_token, message)
         except:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="發生錯誤！"))
@@ -70,6 +70,11 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token, message)
         except:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="發生錯誤！"))
+
+
+
+if __name__ == "__main__":
+    app.run()
 
 
 
