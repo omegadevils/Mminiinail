@@ -5,6 +5,9 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
     ImageSendMessage,LocationSendMessage
 )
+from urllib.parse import parse_qsl
+import os
+
 
 app = Flask(__name__)
 
@@ -76,7 +79,3 @@ def handle_message(event):
 if __name__ == "__main__":
     app.run()
 
-
-
-if __name__ == "__main__":
-    app.run()
